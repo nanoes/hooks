@@ -35,8 +35,15 @@ const Characters = () => {
         setSearch(event.target.value)
     }
     const filtederedUsers = characters.filter((user)=>{
-        return user.name.toLowerCase().includes(search.toLocaleLowerCase());
-    })
+        return user.name.toLowerCase().includes(search.toLowerCase());
+    });
+    const filteredUsers = useMemo(()=>{
+        characters.filter((user =>{
+            return user.name.toLowerCase().includes(search.toLowerCase());
+        }),
+        [characters, setCharacters]
+        )
+    });
 
     return (
         <div className='Characters'>
